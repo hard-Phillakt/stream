@@ -60,7 +60,7 @@ const config = {
     allow_origin: '*'
   },
   relay: {
-    ffmpeg: `${path.join(__dirname, '/', 'ffmpeg_4.3.1')}`,
+    ffmpeg: `/usr/bin/ffmpeg`,
     // ffmpeg: '/usr/local/bin/ffmpeg',
     tasks: [
       {
