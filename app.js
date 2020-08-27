@@ -60,8 +60,8 @@ const config = {
     allow_origin: '*'
   },
   relay: {
-    // ffmpeg: `${path.join(__dirname, '/', 'ffmpeg.exe')}`,
-    ffmpeg: '/usr/local/bin/ffmpeg',
+    ffmpeg: `${path.join(__dirname, '/', 'ffmpeg_4.3.1')}`,
+    // ffmpeg: '/usr/local/bin/ffmpeg',
     tasks: [
       {
         app: 'cctv',
@@ -82,4 +82,4 @@ const config = {
 };
 
 var nms = new NodeMediaServer(config)
-// nms.run();
+nms.run();
