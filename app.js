@@ -94,8 +94,8 @@ const config = {
     allow_origin: '*'
   },
   relay: {
-    // ffmpeg: `/usr/bin/ffmpeg`,
-    ffmpeg: 'C:/Users/mds/Desktop/media/ffmpeg.exe',
+    ffmpeg: `/usr/bin/ffmpeg`,
+    // ffmpeg: 'C:/Users/mds/Desktop/media/ffmpeg.exe',
     tasks: [
       {
         app: 'cctv',
