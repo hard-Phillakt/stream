@@ -15,27 +15,61 @@ app.get('/', (req, res) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+        <style>
+            video {
+                width: 600px;
+                margin: 30px;
+            }
+    
+            .videoElement__wrapp {
+                display: flex;
+            }
+        </style>
       </head>
       <body>
         
-        <video id="videoElement" style="width: 300px;"></video>
-
+        <div class="videoElement__wrapp">
+            <video id="videoElement"></video>
+    
+            <video id="videoElement2"></video>
+        </div>
+    
+    
         
-        <script>
-          if (flvjs.isSupported()) {
-            var videoElement = document.getElementById("videoElement");
-            var flvPlayer = flvjs.createPlayer({
-              type: "flv",
-              //url: "ws://95.213.224.3:5000/cctv/BigBuckBunny.flv",
-              url: "ws://95.213.224.3:5000/cctv/BigBuckBunny.flv",
-            });
-            flvPlayer.attachMediaElement(videoElement);
-            flvPlayer.load();
-          }
-
-          document.body.onclick = function(){
-            flvPlayer.play();
-          }
+      <script>
+        if (flvjs.isSupported()) {
+          var videoElement = document.getElementById("videoElement");
+          var flvPlayer = flvjs.createPlayer({
+            type: "flv",
+            url: "ws://95.213.224.3:5000/cctv/stream.flv",
+            //url: "ws://localhost:5000/cctv/stream.flv",
+          });
+          flvPlayer.attachMediaElement(videoElement);
+          flvPlayer.load();
+        }
+  
+        var videoElementBnt = document.querySelector('#videoElement');
+        videoElementBnt.onclick = function(){
+          flvPlayer.play();
+        }
+  
+  
+        if (flvjs.isSupported()) {
+          var videoElement2 = document.getElementById("videoElement2");
+          var flvPlayer2 = flvjs.createPlayer({
+            type: "flv",
+            url: "ws://95.213.224.3:5000/cctv/stream2.flv",
+            //url: "ws://localhost:5000/cctv/stream2.flv",
+          });
+          flvPlayer2.attachMediaElement(videoElement2);
+          flvPlayer2.load();
+        }
+  
+        var videoElement2Bnt = document.querySelector('#videoElement2');
+        videoElement2Bnt.onclick = function(){
+          flvPlayer2.play();
+        }
+  
         </script>
       </body>
     </html>
@@ -60,17 +94,33 @@ const config = {
     allow_origin: '*'
   },
   relay: {
-    ffmpeg: `/usr/bin/ffmpeg`,
-    // ffmpeg: '/usr/local/bin/ffmpeg',
+    // ffmpeg: `/usr/bin/ffmpeg`,
+    ffmpeg: 'C:/Users/mds/Desktop/media/ffmpeg.exe',
     tasks: [
       {
         app: 'cctv',
         mode: 'static',
         // edge: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
-        edge: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
-        name: 'BigBuckBunny',
+        edge: 'rtsp://freja.hiof.no:1935/rtplive/definst/hessdalen03.stream',
+        name: 'stream',
         rtsp_transport: 'tcp' //['udp', 'tcp', 'udp_multicast', 'http']
       },
+      {
+        app: 'cctv',
+        mode: 'static',
+        // edge: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
+        edge: 'rtsp://freja.hiof.no:1935/rtplive/definst/hessdalen03.stream',
+        name: 'stream2',
+        rtsp_transport: 'tcp' //['udp', 'tcp', 'udp_multicast', 'http']
+      },
+      // {
+      //   app: 'cctv',
+      //   mode: 'static',
+      //   // edge: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
+      //   edge: 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov',
+      //   name: 'BigBuckBunny',
+      //   rtsp_transport: 'tcp' //['udp', 'tcp', 'udp_multicast', 'http']
+      // },
       // {
       //   app: 'mv',
       //   mode: 'static',
