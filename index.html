@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+    <style>
+      video {
+        width: 800px;
+        margin: 30px;
+      }
+
+      .videoElement__wrapp {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .videoElement__wrapp .control {
+        display: flex;
+        justify-content: center;
+      }
+
+      button {
+        cursor: pointer;
+        margin: 0 15px;
+        padding: 5px 50px;
+      }
+
+      #play {
+        background: green;
+        color: #fff;
+      }
+
+      #pause {
+        margin: 0 15px;
+        background: red;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="videoElement__wrapp">
+      <video id="videoElement"></video>
+      <div class="control">
+        <button id="play">Play</button>
+        <button id="pause">Pause</button>
+      </div>
+    </div>
+
+    <script>
+      if (flvjs.isSupported()) {
+        var videoElement = document.getElementById("videoElement");
+        var flvPlayer = flvjs.createPlayer({
+          type: "flv",
+          url: "ws://95.213.224.3:5000/cctv/stream.flv",
+          //  url: "ws://localhost:5000/cctv/stream.flv",
+          
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+      }
+
+      var play = document.querySelector("#play");
+      var pause = document.querySelector("#pause");
+
+      play.onclick = function () {
+        flvPlayer.play();
+      };
+
+      pause.onclick = function () {
+        flvPlayer.play();
+      };
+    </script>
+  </body>
+</html>
